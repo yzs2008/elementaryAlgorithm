@@ -28,7 +28,7 @@ public class Sudoku {
 	private void permutation(int[] collection,int curIndex,int theN){
 		if(curIndex==theN){
 			if(isGrid9(collection)){
-				gridList.add(collection);
+				gridList.add(copyArray(collection));
 			}
 			return;
 		}else{
@@ -44,6 +44,13 @@ public class Sudoku {
 				collection[curIndex]=tem;
 			}
 		}
+	}
+	private int[] copyArray(int[] collection){
+		int[] array=new int[collection.length];
+		for(int i=0;i<collection.length;i++){
+			array[i]=collection[i];
+		}
+		return array;
 	}
 	private boolean isGrid9(int[] collection){
 		boolean yes=true;
@@ -83,7 +90,7 @@ public class Sudoku {
 	}
 	public void showGrids(){
 		for(int i=0;i<gridList.size();i++){
-			System.out.println("****************************"+i);
+			System.out.print("****************************"+i);
 			int[] grid=gridList.get(i);
 			for(int j=0;j<grid.length;j++){
 				if(j%3==0){
