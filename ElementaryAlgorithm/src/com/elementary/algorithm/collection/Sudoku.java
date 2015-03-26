@@ -9,12 +9,12 @@ import java.util.List;
 
 /**
  * @author yzs
- * ¾Å¹¬¸ñÓÎÏ·
- * Í¨¹ı¶Ô1-9µÄÈ«ÅÅÁĞ£¬È»ºó¼ÆËãÃ¿Ò»ÖÖ·ûºÏ¾Å¹¬¸ñµÄÅÅÁĞ£¬ÕÒ³öËùÓĞ¾Å¹¬¸ñ×éºÏ
+ * ä¹å®«æ ¼æ¸¸æˆ
+ * é€šè¿‡å¯¹1-9çš„å…¨æ’åˆ—ï¼Œç„¶åè®¡ç®—æ¯ä¸€ç§ç¬¦åˆä¹å®«æ ¼çš„æ’åˆ—ï¼Œæ‰¾å‡ºæ‰€æœ‰ä¹å®«æ ¼ç»„åˆ
  */
 public class Sudoku {
 
-	private List<int[]> gridList;//¾Å¹¬¸ñ×éºÏ¼¯ºÏ
+	private List<int[]> gridList;//ä¹å®«æ ¼ç»„åˆé›†åˆ
 	public Sudoku(){
 		gridList=new ArrayList<int[]>();
 	}
@@ -55,7 +55,7 @@ public class Sudoku {
 	private boolean isGrid9(int[] collection){
 		boolean yes=true;
 		int total=15;
-		int sum=0;//ÑéÖ¤ĞĞµÄºÍÊÇ·ñµÈÓÚ15
+		int sum=0;//éªŒè¯è¡Œçš„å’Œæ˜¯å¦ç­‰äº15
 		for(int i=0;i<9;i++){
 			sum+=collection[i];
 			if((i+1)%3==0){
@@ -65,7 +65,7 @@ public class Sudoku {
 				sum=0;
 			}
 		}
-		sum=0;//ÑéÖ¤ÁĞµÄºÍÊÇ·ñµÈÓÚ15
+		sum=0;//éªŒè¯åˆ—çš„å’Œæ˜¯å¦ç­‰äº15
 		for(int col=0,row=0;col<9;col++,row+=3){
 			row=row+1-1;
 			sum+=collection[row];
@@ -77,7 +77,7 @@ public class Sudoku {
 				row=(col+1)/3-3;
 			}
 		}
-		//ÑéÖ¤¶Ô½ÇÏßÖ®ºÍÊÇ·ñµÈÓÚ15
+		//éªŒè¯å¯¹è§’çº¿ä¹‹å’Œæ˜¯å¦ç­‰äº15
 		sum=collection[0]+collection[4]+collection[8];
 		if(sum!=total){
 			return !yes;
