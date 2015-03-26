@@ -3,6 +3,8 @@
  */
 package com.elementary.algorithm.tree;
 
+import java.util.Stack;
+
 /**
  * @author kaidi
  *	preorder result:
@@ -74,6 +76,60 @@ public class TreeTraverse {
 		}
 		visit(node);
 	}
+	public void preOrderTraverseS(Tree<Character> node){
+		Tree<Character> curNode;
+		Stack<Tree<Character>> stack=new Stack<Tree<Character>>();
+		stack.push(node);
+		while(!stack.empty()){
+			curNode=stack.pop();
+			visit(curNode);
+			if(curNode.getRightChild()!=null){
+				stack.push(curNode.getRightChild());
+			}
+			if(curNode.getLeftChild()!=null){
+				stack.push(curNode.getLeftChild());
+			}
+		}
+	}
+	public void inOrderTraverseS(Tree<Character> node){
+		Tree<Character> curNode=node;
+		Stack<Tree<Character>> stack=new Stack<Tree<Character>>();
+		stack.push(node);
+		boolean back=false;
+		while(!stack.empty()){
+			while(curNode.getLeftChild()!=null && !back){
+				stack.push(curNode.getLeftChild());
+				curNode=curNode.getLeftChild();
+			}
+			curNode=stack.pop();
+			visit(curNode);
+			if(curNode.getRightChild()!=null){
+				stack.push(curNode.getRightChild());
+				curNode=curNode.getRightChild();
+				back=false;
+			}else{
+				back=true;
+			}
+		}
+	}
+	public void inOrderTraverseS2(Tree<Character> node){
+		Tree<Character> curNode=node;
+		Stack<Tree<Character>> stack =new Stack<Tree<Character>>();
+		while(!stack.empty()||curNode!=null){
+			if(curNode!=null){
+				stack.push(curNode);
+				curNode=curNode.leftChild;
+			}else{
+				curNode=stack.pop();
+				visit(curNode);
+				curNode=curNode.rightChild;
+			}
+		}
+	}
+	public void postOrderTraverseS(Tree<Character> node){
+		
+	}
+	
 	private void visit(Tree<Character> node){
 		System.out.print(node.getData());
 	}
@@ -86,6 +142,15 @@ public class TreeTraverse {
 		traverse.inOrderTraverse(traverse.treeRoot);
 		System.out.println("\npost order result:");
 		traverse.postOrderTraverse(traverse.treeRoot);
+		
+		System.out.println("\npreorder with no recursive result:");
+		traverse.preOrderTraverseS(traverse.treeRoot);
+		
+		System.out.println("\ninorder with no recursive result:");
+		traverse.inOrderTraverseS(traverse.treeRoot);
+
+		System.out.println("\ninorder with no recursive result:");
+		traverse.inOrderTraverseS2(traverse.treeRoot);
 	}
 
 }
