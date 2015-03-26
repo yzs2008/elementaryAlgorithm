@@ -127,7 +127,21 @@ public class TreeTraverse {
 		}
 	}
 	public void postOrderTraverseS(Tree<Character> node){
-		
+		Tree<Character> curNode=node;
+		Stack<Tree<Character>> stack=new Stack<Tree<Character>>();
+		stack.push(curNode);
+		while(!stack.empty()){
+			if(curNode.leftChild!=null){
+				stack.push(curNode.leftChild);
+				curNode=curNode.leftChild;
+			}
+			curNode=stack.pop();
+			visit(curNode);
+			if(curNode.rightChild!=null){
+				stack.push(curNode.rightChild);
+				curNode=curNode.rightChild;
+			}
+		}
 	}
 	
 	private void visit(Tree<Character> node){
@@ -151,6 +165,9 @@ public class TreeTraverse {
 
 		System.out.println("\ninorder with no recursive result:");
 		traverse.inOrderTraverseS2(traverse.treeRoot);
+
+		System.out.println("\npost order with no recursive result:");
+		traverse.postOrderTraverseS(traverse.treeRoot);
 	}
 
 }
