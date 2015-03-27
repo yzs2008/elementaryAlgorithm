@@ -7,7 +7,9 @@ public class ThreadBinaryTreeOperator {
 		index=0;
 		ThreadBinaryTree<Character> root=null;
 		root=constructor(root);
+		System.out.println("call the preorder traverse:");
 		preorderTraverse(root);
+		System.out.println();
 		return inorderTraverseThreading(root);
 	}
 	//use preorder traverse to validate the tree's structure;
@@ -16,6 +18,20 @@ public class ThreadBinaryTreeOperator {
 			visitNode(node);
 			preorderTraverse(node.leftChild);
 			preorderTraverse(node.rightChild);
+		}
+	}
+	private void threadTreeInorderTraverse(ThreadBinaryTree<Character> root){
+		ThreadBinaryTree<Character> node=root.leftChild;
+		while(node!=root){
+			while(node.leftBranch!=BranchType.THREAD){
+				node=node.leftChild;
+			}
+			visitNode(node);
+			while(node.rightBranch==BranchType.THREAD && node.rightChild!=root){//never forget compare node.rightChild with root element, otherwise you will get a never stop loop
+				node=node.rightChild;
+				visitNode(node);
+			}
+			node=node.rightChild;
 		}
 	}
 	//construct the threading binary tree, complete the leaf node's thread;
@@ -29,6 +45,9 @@ public class ThreadBinaryTreeOperator {
 		head.rightChild=head;
 		pre=head;
 		threading(root);
+		//threading  the last one
+		pre.rightBranch=BranchType.THREAD;
+		pre.rightChild=head;
 		head.rightChild=pre;
 		return head;
 	}
@@ -85,6 +104,8 @@ public class ThreadBinaryTreeOperator {
 	public static void main(String[] args) {
 		ThreadBinaryTreeOperator operator=new ThreadBinaryTreeOperator(); 
 		ThreadBinaryTree<Character> threadBinaryTreeRoot = operator.constructorBinaryTree();
-		
+		System.out.println("call the threading inorder traverse:");
+		operator.threadTreeInorderTraverse(threadBinaryTreeRoot);
+		System.out.println();
 	}
 }
