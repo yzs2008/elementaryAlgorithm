@@ -63,8 +63,4 @@ public class Tree<T> {
 
 
 
-	public static void main(String[] args) {
-
-	}
-
 }
