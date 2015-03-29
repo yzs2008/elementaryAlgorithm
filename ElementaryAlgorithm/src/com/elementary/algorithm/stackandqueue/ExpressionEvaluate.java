@@ -2,7 +2,6 @@ package com.elementary.algorithm.stackandqueue;
 
 import java.util.Stack;
 
-import com.sun.javafx.fxml.expression.Expression;
 
 /**
  * 简单表达式求值计算
@@ -28,19 +27,25 @@ public class ExpressionEvaluate {
 		int index=0;
 		while(!isDone){
 			char curChar=expression.charAt(index);
+			if(curChar=='#'&&operatorStack.peek()=='#'){
+				isDone=true;
+				break;
+			}
 			//数字 压栈
 			if(isNumber(curChar)){
-				numberStack.push((double)curChar);
+				numberStack.push(Double.valueOf(String.valueOf(curChar)));
+				index++;
 			}else if(isOperator(curChar)){
-				int priority=getPriority(curChar, operatorStack.peek());
+				//int priority=getPriority(curChar, operatorStack.peek());
+				int priority=getPriority(operatorStack.peek(),curChar );
 				switch(priority){
 					case 0://相等，是括号，需要弹出栈
 						operatorStack.pop();
 						index++;
 						break;
 					case 1:
-						double left=numberStack.pop();
 						double right=numberStack.pop();
+						double left=numberStack.pop();
 						char op=operatorStack.pop();
 						double temResult=precede(left, op, right);
 						numberStack.push(temResult);
@@ -50,6 +55,7 @@ public class ExpressionEvaluate {
 						index++;
 						break;
 					case 2://错误表达式
+						isDone=true;
 						break;
 				}
 			}else{
@@ -177,7 +183,7 @@ public class ExpressionEvaluate {
 	}
 	public static void main(String[] args) {
 		ExpressionEvaluate ee=new ExpressionEvaluate();
-		double result=ee.evaluate("3*(7-2)");
+		double result=ee.evaluate("3*(7-2)/4+3#");
 		System.out.println(result);
 	}
 
