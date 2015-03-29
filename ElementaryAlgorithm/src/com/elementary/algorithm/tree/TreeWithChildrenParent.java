@@ -13,9 +13,10 @@ public class TreeWithChildrenParent<T> {
 	TreeWithChildrenParent<T> parent;//指向父节点
 	LinkedList<TreeWithChildrenParent<T>> children; //直接孩子链表
 	public TreeWithChildrenParent(){
-		
+		children=new LinkedList<TreeWithChildrenParent<T>>();
 	}
 	public TreeWithChildrenParent(T data){
 		this.data=data;
+		children=new LinkedList<TreeWithChildrenParent<T>>();
 	}
 }
