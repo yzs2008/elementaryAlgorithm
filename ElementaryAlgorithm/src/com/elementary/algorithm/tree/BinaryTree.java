@@ -5,20 +5,20 @@ package com.elementary.algorithm.tree;
  * @author kaidi
  *
  */
-public class Tree<T> {
+public class BinaryTree<T> {
 	T data;
-	Tree<T> leftChild;
-	Tree<T> rightChild;
+	BinaryTree<T> leftChild;
+	BinaryTree<T> rightChild;
 	
-	public Tree(){
+	public BinaryTree(){
 		
 	}
 
-	public Tree(T data){
+	public BinaryTree(T data){
 		this.data=data;
 	}
 	
-	public Tree(T data, Tree<T> leftChild, Tree<T> rightChild) {
+	public BinaryTree(T data, BinaryTree<T> leftChild, BinaryTree<T> rightChild) {
 		super();
 		this.data = data;
 		this.leftChild = leftChild;
@@ -39,25 +39,25 @@ public class Tree<T> {
 
 
 
-	public Tree<T> getLeftChild() {
+	public BinaryTree<T> getLeftChild() {
 		return leftChild;
 	}
 
 
 
-	public void setLeftChild(Tree<T> leftChild) {
+	public void setLeftChild(BinaryTree<T> leftChild) {
 		this.leftChild = leftChild;
 	}
 
 
 
-	public Tree<T> getRightChild() {
+	public BinaryTree<T> getRightChild() {
 		return rightChild;
 	}
 
 
 
-	public void setRightChild(Tree<T> rightChild) {
+	public void setRightChild(BinaryTree<T> rightChild) {
 		this.rightChild = rightChild;
 	}
 

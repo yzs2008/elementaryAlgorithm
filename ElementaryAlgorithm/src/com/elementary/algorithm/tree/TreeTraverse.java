@@ -16,20 +16,20 @@ import java.util.Stack;
  */
 public class TreeTraverse {
 
-	Tree<Character> treeRoot;
+	BinaryTree<Character> treeRoot;
 	
 	public TreeTraverse(){
-		treeRoot=new Tree<Character>('-');
-		Tree<Character> plus=new Tree<Character>('+');
-		Tree<Character> a=new Tree<Character>('a');
-		Tree<Character> star=new Tree<Character>('*');
-		Tree<Character> b=new Tree<Character>('b');
-		Tree<Character> minis=new Tree<Character>('-');
-		Tree<Character> c=new Tree<Character>('c');
-		Tree<Character> d=new Tree<Character>('d');
-		Tree<Character> divide=new Tree<Character>('/');
-		Tree<Character> e=new Tree<Character>('e');
-		Tree<Character> f=new Tree<Character>('f');
+		treeRoot=new BinaryTree<Character>('-');
+		BinaryTree<Character> plus=new BinaryTree<Character>('+');
+		BinaryTree<Character> a=new BinaryTree<Character>('a');
+		BinaryTree<Character> star=new BinaryTree<Character>('*');
+		BinaryTree<Character> b=new BinaryTree<Character>('b');
+		BinaryTree<Character> minis=new BinaryTree<Character>('-');
+		BinaryTree<Character> c=new BinaryTree<Character>('c');
+		BinaryTree<Character> d=new BinaryTree<Character>('d');
+		BinaryTree<Character> divide=new BinaryTree<Character>('/');
+		BinaryTree<Character> e=new BinaryTree<Character>('e');
+		BinaryTree<Character> f=new BinaryTree<Character>('f');
 		
 		treeRoot.setLeftChild(plus);
 		treeRoot.setRightChild(divide);
@@ -47,7 +47,7 @@ public class TreeTraverse {
 		divide.setRightChild(f); 
 	}
 	
-	public void preOrderTraverse(Tree<Character> node){
+	public void preOrderTraverse(BinaryTree<Character> node){
 
 		visit(node);
 
@@ -58,7 +58,7 @@ public class TreeTraverse {
 			preOrderTraverse(node.getRightChild());
 		}
 	}
-	public void inOrderTraverse(Tree<Character> node){
+	public void inOrderTraverse(BinaryTree<Character> node){
 		if(node.getLeftChild()!=null){
 			inOrderTraverse(node.getLeftChild());
 		}
@@ -67,7 +67,7 @@ public class TreeTraverse {
 			inOrderTraverse(node.getRightChild());
 		}
 	}
-	public void postOrderTraverse(Tree<Character> node){
+	public void postOrderTraverse(BinaryTree<Character> node){
 		if(node.getLeftChild()!=null){
 			postOrderTraverse(node.getLeftChild());
 		}
@@ -76,9 +76,9 @@ public class TreeTraverse {
 		}
 		visit(node);
 	}
-	public void preOrderTraverseS(Tree<Character> node){
-		Tree<Character> curNode;
-		Stack<Tree<Character>> stack=new Stack<Tree<Character>>();
+	public void preOrderTraverseS(BinaryTree<Character> node){
+		BinaryTree<Character> curNode;
+		Stack<BinaryTree<Character>> stack=new Stack<BinaryTree<Character>>();
 		stack.push(node);
 		while(!stack.empty()){
 			curNode=stack.pop();
@@ -91,9 +91,9 @@ public class TreeTraverse {
 			}
 		}
 	}
-	public void inOrderTraverseS(Tree<Character> node){
-		Tree<Character> curNode=node;
-		Stack<Tree<Character>> stack=new Stack<Tree<Character>>();
+	public void inOrderTraverseS(BinaryTree<Character> node){
+		BinaryTree<Character> curNode=node;
+		Stack<BinaryTree<Character>> stack=new Stack<BinaryTree<Character>>();
 		stack.push(node);
 		boolean back=false;
 		while(!stack.empty()){
@@ -112,9 +112,9 @@ public class TreeTraverse {
 			}
 		}
 	}
-	public void inOrderTraverseS2(Tree<Character> node){
-		Tree<Character> curNode=node;
-		Stack<Tree<Character>> stack =new Stack<Tree<Character>>();
+	public void inOrderTraverseS2(BinaryTree<Character> node){
+		BinaryTree<Character> curNode=node;
+		Stack<BinaryTree<Character>> stack =new Stack<BinaryTree<Character>>();
 		while(!stack.empty()||curNode!=null){
 			if(curNode!=null){
 				stack.push(curNode);
@@ -126,9 +126,9 @@ public class TreeTraverse {
 			}
 		}
 	}
-	public void postOrderTraverseS(Tree<Character> node){
-		Tree<Character> curNode=node;
-		Stack<Tree<Character>> stack=new Stack<Tree<Character>>();
+	public void postOrderTraverseS(BinaryTree<Character> node){
+		BinaryTree<Character> curNode=node;
+		Stack<BinaryTree<Character>> stack=new Stack<BinaryTree<Character>>();
 		stack.push(curNode);
 		while(!stack.empty()){
 			if(curNode.leftChild!=null){
@@ -144,7 +144,7 @@ public class TreeTraverse {
 		}
 	}
 	
-	private void visit(Tree<Character> node){
+	private void visit(BinaryTree<Character> node){
 		System.out.print(node.getData());
 	}
 	public static void main(String[] args) {

@@ -87,11 +87,28 @@ public class TreeBuilder {
 		root=nodeStack.pop();
 		return root;
 	}
+	//traverse the cross linked tree to builde a binary tree
+	public BinaryTree<Character> convertToBinaryTree(TreeSiblingChild<Character> node){
+		BinaryTree<Character> binaryNode=visitNode(node);
+		if(node.firstChild!=null){
+			binaryNode.leftChild=convertToBinaryTree(node.firstChild);
+		}
+		if(node.closedSibling!=null){
+			binaryNode.rightChild=convertToBinaryTree(node.closedSibling);
+		}
+		return binaryNode;
+	}
+	private BinaryTree<Character> visitNode(TreeSiblingChild<Character> node){
+		BinaryTree<Character> newNode= new BinaryTree<Character>(node.data);
+		return newNode;
+	}
 	public static void main(String[] args) {
 		TreeBuilder builder=new TreeBuilder();
 		String expression="R(A(D,E),B,C(F(G,H,K)))#";
 		TreeWithChildrenParent<Character> root= builder.buildChildrenParentTree(expression);
 		TreeSiblingChild<Character> root2=builder.builderSiblingChildTree(expression);
+		BinaryTree<Character> binaryTreeRoot=null;
+		binaryTreeRoot=builder.convertToBinaryTree(root2);
 
 	}
 
