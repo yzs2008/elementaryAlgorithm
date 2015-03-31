@@ -2,8 +2,6 @@ package com.elementary.algorithm.tree;
 
 import java.util.Stack;
 
-import javax.swing.plaf.metal.MetalIconFactory.TreeFolderIcon;
-
 /**
  * @author yzs 
  * 根据树的广义表表示方法输入字符串，构建树结构
@@ -107,8 +105,7 @@ public class TreeBuilder {
 		String expression="R(A(D,E),B,C(F(G,H,K)))#";
 		TreeWithChildrenParent<Character> root= builder.buildChildrenParentTree(expression);
 		TreeSiblingChild<Character> root2=builder.builderSiblingChildTree(expression);
-		BinaryTree<Character> binaryTreeRoot=null;
-		binaryTreeRoot=builder.convertToBinaryTree(root2);
+		BinaryTree<Character> binaryTreeRoot =builder.convertToBinaryTree(root2);
 
 	}
 
