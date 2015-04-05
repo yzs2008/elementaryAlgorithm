@@ -1,5 +1,8 @@
 package com.elementary.algorithm.sort.insertsort;
 
+
+import java.util.Currency;
+
 import com.elementary.algorithm.linkedlist.DoubleLinkedList;
 
 
@@ -12,37 +15,44 @@ public class InsertSort {
 
 	int[] data={49,38,65,97,76,13,27,49};
 	DoubleLinkedList<Integer> linkedListData;
+	TableNode<Integer>[] table;
 	public InsertSort(){
 		init();
+		initTable();
 	}
-	private void init(){
-		linkedListData=new DoubleLinkedList<Integer>(Integer.MIN_VALUE);
-		DoubleLinkedList<Integer> node49_=new DoubleLinkedList<Integer>(49);
-		DoubleLinkedList<Integer> node38=new DoubleLinkedList<Integer>(38);
-		DoubleLinkedList<Integer> node65=new DoubleLinkedList<Integer>(65);
-		DoubleLinkedList<Integer> node97=new DoubleLinkedList<Integer>(97);
-		DoubleLinkedList<Integer> node76=new DoubleLinkedList<Integer>(76);
-		DoubleLinkedList<Integer> node13=new DoubleLinkedList<Integer>(13);
-		DoubleLinkedList<Integer> node27=new DoubleLinkedList<Integer>(27);
-		DoubleLinkedList<Integer> node49=new DoubleLinkedList<Integer>(49);
-		//向后链
-		linkedListData.next=node49_;
-		node49_.next=node38; 
-		node38.next=node65;
-		node65.next=node97;
-		node97.next=node76;
-		node76.next=node13;
-		node13.next=node27;
-		node27.next=node49;
-		//向前链
-		node49.pre=node27;
-		node27.pre=node13;
-		node13.pre=node76;
-		node76.pre=node97;
-		node97.pre=node65;
-		node65.pre=node38;
-		node38.pre=node49_;
-		node49_.pre=linkedListData;
+	//表插入排序后的调整
+	private void tableArrange(){
+		int curArrange=table[0].next;
+		int next=0;
+		for(int i=1;i<table.length;i++){
+			while(curArrange<i){//小于说明原来此处的元素已经被移动到其它地方，具体位置是next中指示着
+				curArrange=table[curArrange].next;
+			}
+			next=table[curArrange].next;//下一个元素的位置
+			TableNode<Integer> tem=table[i];
+			table[i]=table[curArrange];
+			table[curArrange]=tem;
+			table[i].next=curArrange;//防止链表断裂
+			curArrange=next; 
+		}
+	}
+	//表插入排序
+	public void tableInsertSort(){
+		//构建初始循环链
+		table[0].next=1;
+		table[1].next=0;
+		for(int i=2;i<table.length;i++){
+			int cur=table[i].value;//当前插入值
+			TableNode<Integer> pointer=table[0];
+			while(cur>table[pointer.next].value){
+				pointer=table[pointer.next];
+			}
+			table[i].next=pointer.next;
+			pointer.next=i;
+		}
+		showTableBeforeArrange();	
+		tableArrange();
+		showTableAfterArrange();
 	}
 	//直接插入排序：针对双链表式存储结构
 	//双链表是先删除一个节点，然后再对该节点进行双链表的插入操作 
@@ -121,6 +131,23 @@ public class InsertSort {
 		}
 		showResult();
 	}
+	private void showTableBeforeArrange(){
+		TableNode<Integer> pointer=table[table[0].next];
+		System.out.println("table sort result is:");
+		while(pointer.value!=table[0].value){
+			int tem=pointer.value;
+			pointer=table[pointer.next];
+			System.out.print(tem+" ");
+		}
+		System.out.println();
+	}
+	private void showTableAfterArrange(){
+		System.out.println("after arrange, visit by sequence:");
+		for(int i=1;i<table.length;i++){
+			System.out.print(table[i].value+" ");
+		}
+		System.out.println();
+	}
 	private void showDoubleLinkedList(DoubleLinkedList<Integer> head){
 		System.out.println("double linked list is:");
 		DoubleLinkedList<Integer> pointer=head.next;
@@ -128,6 +155,7 @@ public class InsertSort {
 			System.out.print(pointer.data+" ");
 			pointer=pointer.next;
 		}
+		System.out.println();
 	}
 	private void showResult(){
 		System.out.print("result is:");
@@ -137,11 +165,56 @@ public class InsertSort {
 		System.out.println();
 	}
 	
+	//构建需要进行表排序的数据集
+	private void initTable(){
+		//cannot create a generic array of TableNode<Integer> why?
+		table=new TableNode[9];
+		table[0]=new TableNode<Integer>(Integer.MAX_VALUE);
+		table[1]=new TableNode<Integer>(49);
+		table[2]=new TableNode<Integer>(38);
+		table[3]=new TableNode<Integer>(65);
+		table[4]=new TableNode<Integer>(97);
+		table[5]=new TableNode<Integer>(76);
+		table[6]=new TableNode<Integer>(13);
+		table[7]=new TableNode<Integer>(27);
+		table[8]=new TableNode<Integer>(49);
+	}
+	private void init(){
+		linkedListData=new DoubleLinkedList<Integer>(Integer.MIN_VALUE);
+		DoubleLinkedList<Integer> node49_=new DoubleLinkedList<Integer>(49);
+		DoubleLinkedList<Integer> node38=new DoubleLinkedList<Integer>(38);
+		DoubleLinkedList<Integer> node65=new DoubleLinkedList<Integer>(65);
+		DoubleLinkedList<Integer> node97=new DoubleLinkedList<Integer>(97);
+		DoubleLinkedList<Integer> node76=new DoubleLinkedList<Integer>(76);
+		DoubleLinkedList<Integer> node13=new DoubleLinkedList<Integer>(13);
+		DoubleLinkedList<Integer> node27=new DoubleLinkedList<Integer>(27);
+		DoubleLinkedList<Integer> node49=new DoubleLinkedList<Integer>(49);
+		//向后链
+		linkedListData.next=node49_;
+		node49_.next=node38; 
+		node38.next=node65;
+		node65.next=node97;
+		node97.next=node76;
+		node76.next=node13;
+		node13.next=node27;
+		node27.next=node49;
+		//向前链
+		node49.pre=node27;
+		node27.pre=node13;
+		node13.pre=node76;
+		node76.pre=node97;
+		node97.pre=node65;
+		node65.pre=node38;
+		node38.pre=node49_;
+		node49_.pre=linkedListData;
+	}
 	public static void main(String[] args){
 		InsertSort insertSort=new InsertSort();
 		insertSort.showResult(); 
 //		insertSort.directInsertSort();
 //		insertSort.directInsertSort4LinkedList();
 		insertSort.binaryInsertSort();
+		insertSort.tableInsertSort();
+		
 	}
 }
