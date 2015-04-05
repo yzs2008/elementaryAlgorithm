@@ -72,6 +72,31 @@ public class InsertSort {
 		}
 		showDoubleLinkedList(linkedListData);
 	}
+	//折半插入排序：针对顺序数组存储结构
+	public void binaryInsertSort(){
+		for(int i=1;i<data.length;i++){
+			int cur=data[i];
+			
+			int low=0;
+			int high=i-1;
+			int mid=0;
+			while(low<=high){
+				mid=(low+high)/2;
+				if(data[mid]<cur){
+					low=mid+1;
+				}else{
+					high=mid-1;
+				}
+			}
+			//high 指示在正确插入位置之前
+			//插入在high+1
+			for(int j=i;j>high+1;j--){
+				data[j]=data[j-1];
+			}
+			data[high+1]=cur;
+		}
+		showResult();
+	}
 	//直接插入排序:针对顺序数组存储结构
 	public void directInsertSort(){
 		for(int i=1;i<data.length;i++){
@@ -115,7 +140,8 @@ public class InsertSort {
 	public static void main(String[] args){
 		InsertSort insertSort=new InsertSort();
 		insertSort.showResult(); 
-		insertSort.directInsertSort();
-		insertSort.directInsertSort4LinkedList();
+//		insertSort.directInsertSort();
+//		insertSort.directInsertSort4LinkedList();
+		insertSort.binaryInsertSort();
 	}
 }
