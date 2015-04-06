@@ -1,7 +1,5 @@
-package com.elementary.algorithm.sort.insertsort;
+package com.elementary.algorithm.sort;
 
-
-import java.util.Currency;
 
 import com.elementary.algorithm.linkedlist.DoubleLinkedList;
 

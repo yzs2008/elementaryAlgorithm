@@ -1,4 +1,4 @@
-package com.elementary.algorithm.sort.insertsort;
+package com.elementary.algorithm.sort;
 
 /**
  * 直接排序中的表排序数据结构
