@@ -9,7 +9,6 @@ package com.elementary.algorithm.search;
 public class StaticSearch {
 	
 	int[] collection={05,13,19,21,37,56,64,75,80,88,92,94,95,97,98,99,99,100,102,103,104,105,106,107,111};
-	
 	//二分法查找
 	public int binarySearch(int key){
 		int high=collection.length-1;
