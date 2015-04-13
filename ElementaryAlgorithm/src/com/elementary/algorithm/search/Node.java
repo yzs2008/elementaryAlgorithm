@@ -10,7 +10,7 @@ public class Node<T> {
 	T data;//值
 	Node<T> left;//左孩子
 	Node<T> right;//右孩子
-	Node<T> prarent;//父节点
+	Node<T> parent;//父节点
 	int weight;//该节点的权重
 	int index;//节点在顺序存储表中的位置
 	
